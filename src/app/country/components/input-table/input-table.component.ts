@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import {debounceTime} from 'rxjs/operators';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class InputTableComponent implements OnInit {
 
   ngOnInit() {
     this.debouncer
-    .pipe(debounceTime(300))
+    .pipe(debounceTime(300),distinctUntilChanged())
       .subscribe(
         value => { console.log('debouncer:', value) });
   }
@@ -36,6 +36,10 @@ export class InputTableComponent implements OnInit {
 
 }
 function debounceTime(debounceTime: any) {
+  throw new Error('Function not implemented.');
+}
+
+function distinctUntilChanged(): import("rxjs").OperatorFunction<unknown, unknown> {
   throw new Error('Function not implemented.');
 }
 
