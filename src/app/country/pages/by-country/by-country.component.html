@@ -1,0 +1,18 @@
+<h2>By Country</h2>
+<hr>
+<div class="row">
+  <div class="col">
+    <app-input-table (onEnter)=search($event)></app-input-table>
+  </div>
+</div>
+<hr>
+
+<div *ngIf="errorMsg" class="alert-danger">
+  Could didn't find the country {{query}}
+</div>
+
+<div class="row">
+  <div class="col">
+    <app-country-table [countriesArray]="countriesArray"></app-country-table>
+  </div>
+</div>
