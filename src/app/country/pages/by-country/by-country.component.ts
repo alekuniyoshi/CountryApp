@@ -32,5 +32,11 @@ export class ByCountryComponent {
       );
   }
 
+  sugestions(query: string) {
+    this.errorMsg = false;
+    console.log(query);
+    //Create suggestions
+
+  }
 
 }

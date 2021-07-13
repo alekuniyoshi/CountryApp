@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -12,15 +12,17 @@ export class InputTableComponent implements OnInit {
   @Output() onEnter: EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
 
-  debouncer: Subject<string> = new Subject();
+  @Input() placeholder: string ='';
+
+  debounce: Subject<string> = new Subject();
 
   query: string = '';
 
   ngOnInit() {
-    this.debouncer
-    .pipe(debounceTime(300),distinctUntilChanged())
+    this.debounce
+      .pipe(debounceTime(300))
       .subscribe(
-        value => { console.log('debouncer:', value) });
+        value => { this.onDebounce.emit(this.query) });
   }
 
   search() {
@@ -28,18 +30,11 @@ export class InputTableComponent implements OnInit {
   }
 
   keyPresed() {
-    this.debouncer.next(this.query);
+    this.debounce.next(this.query);
   }
 
   constructor() { }
 
 
-}
-function debounceTime(debounceTime: any) {
-  throw new Error('Function not implemented.');
-}
-
-function distinctUntilChanged(): import("rxjs").OperatorFunction<unknown, unknown> {
-  throw new Error('Function not implemented.');
 }
 

@@ -1,4 +1,4 @@
 <form (ngSubmit)="search()" autocomplete="off">
-  <input type="text" name="term" placeholder="Search country.." [(ngModel)]="query" (input)="keyPresed()"
+  <input type="text" name="term" [placeholder]="placeholder" [(ngModel)]="query" (input)="keyPresed()"
     class="form-control">
 </form>
