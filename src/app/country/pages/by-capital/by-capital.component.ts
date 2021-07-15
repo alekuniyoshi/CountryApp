@@ -13,13 +13,16 @@ export class ByCapitalComponent {
   query: string = '';
   errorMsg: boolean = false;
   countriesArray: Country[] = [];
+  sugestionsCapitals: Country[] = [];
   index: number = 0;
+  showSugestion: boolean = false;
 
 
   constructor(private countryService: CountryService) { }
 
   search(query: string) {
     this.query = query;
+    this.showSugestion = false;
     this.countryService.SearchCapital(this.query)
       .subscribe(
         capitals => {
@@ -34,9 +37,13 @@ export class ByCapitalComponent {
   }
 
   sugestions(query: string) {
+    this.showSugestion = true;
     this.errorMsg = false;
-    console.log(query);
-    //Create suggestions
+    this.query = query;
+
+    this.countryService.SearchCapital(this.query).subscribe(
+      capitals => (this.sugestionsCapitals = capitals.splice(0, 5)),
+      (error => this.sugestionsCapitals = []));
 
   }
 

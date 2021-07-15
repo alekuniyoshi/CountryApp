@@ -1,19 +1,26 @@
-<h2>By Region</h2>
+<h3>Searh by Region <small>{{activeRegion |titlecase}}</small></h3>
 <hr>
+
 <div class="row">
   <div class="col">
-    <app-input-table (onEnter)=search($event) (onDebounce)=sugestions($event) placeholder="Search region...">
-    </app-input-table>
-  </div>
-</div>
-<hr>
 
-<div *ngIf="errorMsg" class="alert-danger">
-  Could didn't find the region {{query}}
-</div>
+    <button *ngFor="let region of regions"
+      [class]="(region === activeRegion)? 'btn btn-primary m-1':'btn btn-outline-primary m-1'"
+      (click)="activateRegion(region)">
+      {{region | titlecase}}
+    </button>
 
-<div *ngIf="countriesArray.length > 0" class="row">
-  <div class="col">
-    <app-country-table [countriesArray]="countriesArray"></app-country-table>
+    <!--  <button *ngFor="let region of regions" class="btn btn-outline-primary"
+    [ngClass]="{'btn-primary': activeRegion===region,
+                'btn-outline-primary': activeRegion!==region}"
+                (click)="activateRegion(region)">
+                {{region}}
+    </button> -->
+
+    <div *ngIf="countries.length > 0" class="row">
+      <div class="col">
+        <app-country-table [countriesArray]="countries"></app-country-table>
+      </div>
+    </div>
   </div>
 </div>

@@ -12,6 +12,15 @@
   Could didn't find the capital {{query}}
 </div>
 
+<ul *ngIf="showSugestion"class="list-group">
+  <li *ngFor="let capital of sugestionsCapitals" class="list-group-item list-group-item-action">
+    <a [routerLink]="['/viewCountry',capital.alpha2Code]" class="nav-link">{{capital.capital}}, {{capital.name}}</a>
+  </li>
+  <li class="list-group-item list-group-item-action">
+    <a (click)="search(query)" class="nav-link">Search {{query}}</a>
+  </li>
+</ul>
+
 <div *ngIf="countriesArray.length > 0" class="row">
   <div class="col">
     <app-country-table [countriesArray]="countriesArray"></app-country-table>

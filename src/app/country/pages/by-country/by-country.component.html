@@ -12,6 +12,15 @@
   Could didn't find the country {{query}}
 </div>
 
+<ul *ngIf="showSugestion"class="list-group">
+  <li *ngFor="let country of sugestionsCountries" class="list-group-item list-group-item-action">
+    <a [routerLink]="['/viewCountry',country.alpha2Code]" class="nav-link">{{country.name}}</a>
+  </li>
+  <li class="list-group-item list-group-item-action">
+    <a (click)="search(query)" class="nav-link">Search {{query}}</a>
+  </li>
+</ul>
+
 <div *ngIf="countriesArray.length > 0" class="row">
   <div class="col">
     <app-country-table [countriesArray]="countriesArray"></app-country-table>
